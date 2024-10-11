@@ -49,19 +49,19 @@ public class Main {
         BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
         DataOutputStream out = new DataOutputStream(s.getOutputStream());
         String inviata = new String();
-        
+
         do {
             Scanner scan = new Scanner(System.in);
             System.out.println("inserisci, inserisci exit per uscire");
             String stringaMess = scan.nextLine();
             System.out.println("hai inserito: " + stringaMess);
-            scan.close();
             
             if (stringaMess.equals("exit")) {
-                stringaMess = "!";
-                out.writeBytes(stringaMess + '\n');
+                inviata = stringaMess;
+                out.writeBytes(inviata + '\n');
                 break;
             }
+            
             inviata = stringaMess;
             out.writeBytes(inviata + '\n');
 
