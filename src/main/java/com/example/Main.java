@@ -68,7 +68,7 @@ public class Main {
                 break;
 
                 default:
-                        operazione = stringaScelta;
+                        operazione = "!";
                         out.writeBytes(operazione + "\n");
                     break;
             }
@@ -80,9 +80,11 @@ public class Main {
             if (stringaRimandata.equals("!")) {
                 //notifica di errore
                 System.out.println("operazione non valida, inserisci solo le operazioni proposte");
+            }else{
+                System.out.println("la stringa mo è: " + stringaRimandata);
             }
-            //operazione riuscita
-            System.out.println("la stringa mo è: " + stringaRimandata);
+            
+            
   
         } while (true);
         
