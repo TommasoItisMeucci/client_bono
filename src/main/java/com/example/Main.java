@@ -14,60 +14,76 @@ public class Main {
         Socket s = new Socket("localhost", 3000);
         System.out.println("client collegato!");
 
-        //first try 
-        /* 
-        BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-        DataOutputStream out = new DataOutputStream(s.getOutputStream());
-
-        String stringaInviata = "salve" + '\n';
-        out.writeBytes(stringaInviata);
-
-        String stringaRimandata = in.readLine();
-        System.out.println("la stringa mo è: " + stringaRimandata);
-        String stringaRimandata = in.readLine();
-        System.out.println("la stringa mo è: " + stringaRimandata);
-        
-        s.close();*/
-        //second try 
-        /* 
-        BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-        DataOutputStream out = new DataOutputStream(s.getOutputStream());
-
-        Scanner scan = new Scanner(System.in);
-        System.out.println("inserisci");
-        String stringaInviata = scan.nextLine();
-        System.out.println("hai inserito: " + stringaInviata);
-        scan.close();
-        out.writeBytes(stringaInviata + '\n');
-
-        String stringaRimandata = in.readLine();
-        System.out.println("la stringa mo è: " + stringaRimandata);
-        
-        s.close();*/
-
-        //
         BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
         DataOutputStream out = new DataOutputStream(s.getOutputStream());
         String inviata = new String();
+        String operazione = new String();
 
         do {
+            //Stringa 
             Scanner scan = new Scanner(System.in);
-            System.out.println("inserisci, inserisci exit per uscire");
+            System.out.println("inserisci una parola oppure inserisci exit per uscire");
             String stringaMess = scan.nextLine();
             System.out.println("hai inserito: " + stringaMess);
-            
+
             if (stringaMess.equals("exit")) {
                 inviata = stringaMess;
                 out.writeBytes(inviata + '\n');
                 break;
             }
             
+            //invia la parola
             inviata = stringaMess;
             out.writeBytes(inviata + '\n');
 
+
+            //operazione 
+            System.out.println("inserisci l'operazione da eseguire");
+            System.out.println("1) premi 'M' per mettere la parola in maiuscolo");
+            System.out.println("2) premi 'm' per mettere la parola in minuscolo");
+            System.out.println("3) premi 'r' per ribaltare la parola");
+            System.out.println("4) premi 'c' per contare il numero di caratteri della parola");
+            String stringaScelta = scan.nextLine();
+            System.out.println("hai inserito: " + stringaScelta);
+            
+            switch (stringaScelta) {
+                case "M"://maiuscolo
+                    operazione = stringaScelta;
+                    out.writeBytes(operazione + "\n");
+                    break;
+                
+                case "m"://minuscolo
+                    operazione = stringaScelta;
+                    out.writeBytes(operazione + "\n");
+                break;
+
+                case "r"://ribaltare
+                    operazione = stringaScelta;
+                    out.writeBytes(operazione + "\n");
+                break;
+
+                case "c"://contare
+                    operazione = stringaScelta;
+                    out.writeBytes(operazione + "\n");
+                break;
+
+                default:
+                        operazione = stringaScelta;
+                        out.writeBytes(operazione + "\n");
+                    break;
+            }
+          
+
+            //prendo la stringa
             String stringaRimandata = in.readLine();
+            //controllo di errore
+            if (stringaRimandata.equals("!")) {
+                //notifica di errore
+                System.out.println("operazione non valida, inserisci solo le operazioni proposte");
+            }
+            //operazione riuscita
             System.out.println("la stringa mo è: " + stringaRimandata);
-        
+  
         } while (true);
         
         s.close();
